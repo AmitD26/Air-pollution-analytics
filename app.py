@@ -9,6 +9,7 @@ from flask import *
 app = Flask(__name__)
 
 
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -29,6 +30,13 @@ def add_headers(response):
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
     return response
 
+@app.route('/overview_bar_chart')
+def overview_bar_chart():
+    pollutant = request.args.get("pollutant")
+    #bar_chart = aqi_data_yearwise[aqi_data_yearwise.State == state][["Year", pollutant + " AQI"]]
+    bar_chart = df.groupby("year")[pollutant+ " AQI"].mean()
+    bar_chart = bar_chart.reset_index()
+    return bar_chart.to_json(orient="records")
 
 
 if __name__ == "__main__":

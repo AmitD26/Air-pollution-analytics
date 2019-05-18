@@ -1,13 +1,11 @@
 function draw_bar_chart(data, pollutant) {
     pollutant = pollutant + " AQI";
-    var margin = {top: 20, right: 20, bottom: 100, left: 40},
-        width = 960 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+    var margin = {top: 10, right: 20, bottom: 100, left: 70},
+        width = 860 - margin.left - margin.right,
+        height = 350 - margin.top - margin.bottom;
 
-    console.log(pollutant)
-    console.log(data.map(function (d) {
-        return d[pollutant]
-    }))
+    console.log(data)
+
 
 // set the ranges
     var x = d3.scaleBand()
@@ -26,8 +24,9 @@ function draw_bar_chart(data, pollutant) {
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
+
     x.domain(data.map(function (d) {
-        return d.Year;
+        return d.year;
     }));
     y.domain([0, d3.max(data, function (d) {
         return +d[pollutant];
@@ -39,7 +38,7 @@ function draw_bar_chart(data, pollutant) {
         .enter().append("rect")
         .attr("class", "bar")
         .attr("x", function (d) {
-            return x(d.Year);
+            return x(d.year);
         })
         .attr("width", x.bandwidth())
         .attr("y", function (d) {
@@ -61,7 +60,7 @@ function draw_bar_chart(data, pollutant) {
 
     svg.append("text")
         .attr("transform", "rotate(-90)")
-        .attr("y", 0 - margin.left)
+        .attr("y", 0-40)
         .attr("x", 0 - (height / 2))
         .attr("dy", "1em")
         .style("text-anchor", "middle")
