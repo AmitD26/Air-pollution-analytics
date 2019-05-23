@@ -1,4 +1,4 @@
-function draw_line_chart(data, pollutant, popn_or_deaths) {
+function draw_line_chart1(data, pollutant, popn_or_deaths) {
     console.log(data)
     pollutant = pollutant + " AQI";
     console.log(pollutant)
@@ -42,7 +42,7 @@ function draw_line_chart(data, pollutant, popn_or_deaths) {
     // append the svg obgect to the body of the page
     // appends a 'group' element to 'svg'
     // moves the 'group' element to the top left margin
-    var svg = d3.select("body").append("svg").attr("id","double_line")
+    var svg = d3.select("body").append("svg").attr("id","double_line1")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")

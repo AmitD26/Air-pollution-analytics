@@ -4,10 +4,33 @@
     border-left: 3px solid whitesmoke;
     height: 100%;
     position: absolute;
-    left: 60%;
+    /*left: 60%;*/
     margin-left: -3px;
     top: 0;
 }
+
+#year,#pollutant, #state_list,#pollutant_2,#popn_polln_year,#popn_pollutant,#popn_state_list,#popn_states_polln,#deaths_state_list,#deaths_states_polln,#deaths_polln_year,#deaths_pollutant,#brush_year
+
+{
+    color: #08809C;
+}
+
+
+.bar1 { fill: blue; }
+.bar2 { fill: deepskyblue; }
+.bar3 { fill: steelblue; }
+.bar:hover {fill: orange; }
+.axis--x path {  }
+.line_pca {
+    fill: none;
+    stroke: red;
+    stroke-width: 2;
+}
+.dot {
+    fill: red;
+    stroke: red;
+}
+
 body {
     font-family: "Lato", sans-serif;
     transition: background-color .5s;
@@ -31,13 +54,14 @@ body {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181 ;
+    color: #818181;
     display: block;
     transition: 0.3s;
 }
 
 .sidenav a:hover {
     color: #f1f1f1;
+    text-decoration-line: none;
 }
 
 .sidenav .closebtn {
@@ -57,7 +81,6 @@ body {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
 }
-
 .legend {
     position:absolute;
     left:20px;
@@ -113,3 +136,63 @@ body {
 .dropdown a:hover {background-color: #ddd;}
 
 .show {display: block;}
+
+
+/*Single-line-chart*/
+
+.legend {
+    position:absolute;
+    left:20px;
+    top:30px;
+}
+
+.axis text {
+    font: 10px sans-serif;
+}
+
+.axis line, .axis path {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 2px;
+}
+
+.axisSteelBlue text{
+    fill: steelblue;
+}
+
+.axisRed text{
+    fill: red;
+}
+
+.bar { fill: steelblue; }
+
+
+/*Table loadings*/
+table {
+    border-collapse: collapse;
+    width: 25%;
+    position: absolute;
+    left: 930px;
+    top : 110px;
+
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #ffffff}
+
+tr:nth-child(odd){background-color: #ffffff}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}

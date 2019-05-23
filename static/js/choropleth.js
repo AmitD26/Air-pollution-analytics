@@ -6,11 +6,13 @@ var state = data["State"];
 var value = data[Object.keys(data)[1]];
 
 //Width and height of map
-    var width = 960;
+    var width = 860;
     var height = 350;
 
     var lowColor = '#f9f9f9'
     var highColor = '#bc2a66'
+
+
 
 // D3 Projection
     var projection = d3.geoAlbersUsa()
@@ -23,13 +25,15 @@ var value = data[Object.keys(data)[1]];
 
 //Create SVG element and append map to the SVG
     var svg = d3.select("body")
-        .append("svg")
+        .append("svg").attr("id","page1_svg")
         .attr("width", width)
         .attr("height", height)
 .append("g")
         .attr("transform",
             "translate(" + 10 + "," + 0 + ")");
 
+
+$("#page1_svg").css({top:100,left:100, position:"absolute"});
 // Load in my states data!
 
      var values = Object.keys(value).map(function(key) {
@@ -74,6 +78,9 @@ var value = data[Object.keys(data)[1]];
                 }
 
             }
+var div = d3.select("body").append("div")
+                .attr("class", "tooltip")
+                .style("opacity", 0);
 
             // Bind the data to the SVG and create one path per GeoJSON feature
             svg.selectAll("path")
@@ -83,18 +90,31 @@ var value = data[Object.keys(data)[1]];
                 .attr("d", path)
                 .style("stroke", "#fff")
                 .style("stroke-width", "1")
-                .style("fill", function(d) { return ramp(d.properties.value) });
+                .style("fill", function(d) { return ramp(d.properties.value) })
+                .on("mouseover", function(d) {
+                            div.transition()
+                                .duration(200)
+                                .style("opacity", .9);
+                            div.html(d.properties.name)
+                                .style("left", (d3.event.pageX) + "px")
+                                .style("top", (d3.event.pageY - 28) + "px")
+                        })
+                .on("mouseout", function(d) {
+                        div.transition()
+                            .duration(500)
+                            .style("opacity", 0);
+                    });
 
             // add a legend
             var w = 140, h = 300;
 
             var key = d3.select("body")
-                .append("svg")
+                .append("svg").attr("id","page1_svg")
                 .attr("width", w)
                 .attr("height", h)
                 .attr("class", "legend")
                 .attr("transform",
-                    "translate(" + 70 + "," + 70 + ")");
+                    "translate(" + 50 + "," + 70 + ")");
 
             var legend = key.append("defs")
                 .append("svg:linearGradient")

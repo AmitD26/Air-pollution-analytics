@@ -10,7 +10,7 @@ openNav = function () {
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft= "0";
-    document.body.style.backgroundColor = "#57575f";
+    document.body.style.backgroundColor = "#E4E7ED";
 }
 
 function myFunction() {
