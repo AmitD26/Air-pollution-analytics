@@ -11,12 +11,9 @@ from sklearn import preprocessing
 app = Flask(__name__)
 
 
-
 @app.route('/')
 def home():
     return render_template('index.html')
-
-
 
 
 @app.route('/us_map', methods=["POST"])
@@ -34,6 +31,7 @@ def add_headers(response):
     response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
     return response
+
 
 @app.route('/overview_bar_chart')
 def overview_bar_chart():
@@ -69,6 +67,7 @@ def popn_US_map():
     popn_US = popn_US.to_json()
     return jsonify(popn_US)
 
+
 @app.route('/population_pollution_US_line_chart')
 def population_pollution_US_line_chart():
     pollutant = request.args.get("pollutant")
@@ -79,7 +78,6 @@ def population_pollution_US_line_chart():
     print("line chart ********************************************")
     print(line_chart)
     return line_chart.to_json(orient="records")
-
 
 
 @app.route('/deaths_pollution_US_line_chart')
@@ -106,6 +104,7 @@ def deaths_US_map():
     deaths_US.to_dict()
     deaths_US = deaths_US.to_json()
     return jsonify(deaths_US)
+
 
 @app.route('/population_pollution_states_line_chart')
 def population_pollution_states_line_chart():
@@ -140,6 +139,7 @@ def deaths_pollution_states_line_chart():
     print(line_chart)
     return line_chart.to_json(orient="records")
 
+
 @app.route('/brush_chart')
 def brush_chart():
     year = request.args.get("year")
@@ -147,7 +147,6 @@ def brush_chart():
     temp = df[df["year"] == int(year)].groupby("State")["O3 AQI","NO2 AQI"].mean()
     temp = temp.reset_index()
     return temp.to_json(orient="records")
-
 
 
 @app.route('/pca_scree_plot')
@@ -170,6 +169,7 @@ def pca_scree_plot():
     scree_plot_data = np.concatenate((labels.T, np.array(scree_plot_data).T.tolist()), axis=1)
     return str(np.array(scree_plot_data).tolist())
 
+
 @app.route('/pca_loadings')
 def pca_loadings():
     df_pca = df[["NO2 Mean", "NO2 AQI", "O3 Mean", "O3 AQI", "SO2 Mean", "SO2 AQI", "CO Mean", "CO AQI"]]
@@ -189,6 +189,7 @@ def pca_loadings():
     table = table.sort_values(by="Squared PCA loadings", ascending=False)
     table_html = table.to_html(classes=["table-bordered", "table-striped", "table-hover"])
     return table_html
+
 
 if __name__ == "__main__":
     df = pd.read_csv("pollution.csv")
